@@ -1,5 +1,5 @@
 import RecorderPage from '../components/RecorderPage';
-import { abilityAccessCtrl, PermissionRequestResult, Permissions } from '@kit.AbilityKit';
+import { abilityAccessCtrl, common, PermissionRequestResult, Permissions } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import Recorder from '../service/Recorder';
 import Notes from '../components/Notes';
@@ -8,36 +8,40 @@ import Records from '../service/Records';
 @Entry
 @Component
 struct Index {
-  @State recorder: Recorder = new Recorder() // create the recorder object
-  @State records: Records = new Records(this.getUIContext().getHostContext()!)
+  @State recorder: Recorder = new Recorder(); // create the recorder object
+  @State records: Records = new Records(this.getUIContext().getHostContext()!);
 
   onDidBuild(): void {
-    this.requestMicPermission()
+    this.requestMicPermission();
   }
 
   build() {
     Swiper() {
-      RecorderPage({ recorder: this.recorder, records: this.records })
-      Notes({ records: this.records })
+      RecorderPage({ recorder: this.recorder, records: this.records });
+      Notes({ records: this.records });
     }
     .height('100%')
-    .width('100%')
+    .width('100%');
   }
 
   async requestMicPermission() {
     const atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
-    const context = this.getUIContext().getHostContext()
+    const context = this.getUIContext().getHostContext();
     const permissions: Permissions[] = ['ohos.permission.MICROPHONE'];
 
     try {
       // request permission from user
       let granted =
         (await (atManager.requestPermissionsFromUser(context,
-          permissions) as Promise<PermissionRequestResult>)).authResults[0] == 0
-      while (!granted) {
+          permissions) as Promise<PermissionRequestResult>)).authResults[0] === 0;
+      if (!granted) {
         // request permission on settings
-        granted = (await atManager.requestPermissionOnSetting(context, permissions))[0] ==
-        abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
+        granted = (await atManager.requestPermissionOnSetting(context, permissions))[0] ===
+        abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
+
+        if (!granted) {
+          await (this.getUIContext().getHostContext() as common.UIAbilityContext).terminateSelf();
+        }
       }
     } catch (error) {
       const err: BusinessError = error as BusinessError;

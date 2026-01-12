@@ -2,27 +2,27 @@ import { fileIo as fs } from '@kit.CoreFileKit';
 
 @Observed
 export default class Records {
-  fileNames: string[] = []
+  fileNames: string[] = [];
 
   constructor(context: Context) {
-    this.fileNames = this._getAll(context)
+    this.fileNames = this._getAll(context);
   }
 
   private _getAll(context: Context): string[] {
     try {
-      let filesDir = context.filesDir;
-      let files: string[] = fs.listFileSync(filesDir);
-      files.sort((a, b) => a.localeCompare(b))
-      return files
+      const filesDir = context.filesDir;
+      const files: string[] = fs.listFileSync(filesDir);
+      files.sort((a, b) => a.localeCompare(b));
+      return files;
     } catch (_) {
-      console.log(_)
-      return []
+      console.error(_);
+      return [];
     }
   }
 
   addNew(fileName: string) {
-    let copy = Array.from(this.fileNames)
-    copy.push(fileName)
-    this.fileNames = copy
+    const copy = Array.from(this.fileNames);
+    copy.push(fileName);
+    this.fileNames = copy;
   }
 }

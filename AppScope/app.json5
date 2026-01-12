@@ -1,7 +1,7 @@
 {
   "app": {
-    "bundleName": "com.hmosdemos.wvnotes",
-    "vendor": "example",
+    "bundleName": "com.hmosdemos.wearable.wv_notes",
+    "vendor": "hmosdemos",
     "versionCode": 1000000,
     "versionName": "1.0.0",
     "icon": "$media:app_layered_image",

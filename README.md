@@ -7,34 +7,37 @@ The app allows user to record and listen voice notes. All records all stored in 
 # Preview
 
 <div>
-  <img src="media/6.GIF" width="24%">
-  <img src="media/3.JPG" width="24%">
-  <img src="media/2.JPG" width="24%">
+  <img src="screenshots/6.GIF" width="25%">
+  <img src="screenshots/3.JPG" width="25%">
+  <img src="screenshots/2.JPG" width="25%">
 </div>
 
 # Use Cases
+
 - Record voice memos quickly and offline
 - Browse and listen to previously saved notes
-- Visual wave animation while recording 
+- Visual wave animation while recording
 
 # Technology
 
 ## Stack
+
 - **Languages**: ArkTS, ArkUI
 - **Frameworks**: HarmonyOS SDK 5.0.2(14)
 - **Tools**: DevEco Studio Version 5.1.0.828
 - **Libraries**:
-  - `@kit.ArkUI`
-  - `@kit.AbilityKit`
-  - `@kit.BasicServicesKit`
-  - `@kit.CoreFileKit`
-  - `@kit.MediaKit`
-  - `@kit.AudioKit`
+    - `@kit.ArkUI`
+    - `@kit.AbilityKit`
+    - `@kit.BasicServicesKit`
+    - `@kit.CoreFileKit`
+    - `@kit.MediaKit`
+    - `@kit.AudioKit`
 
 ## Required Permissions
+
 - `ohos.permission.MICROPHONE`
   > Required for audio recording functionality during note creation.
-  
+
 # Directory Structure
 
 ```
@@ -59,6 +62,7 @@ entry/src/main/ets/
 ```
 
 # Constraints and Restrictions
+
 ## Supported Device
 
 * Huawei Watch 5
